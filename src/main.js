@@ -24,7 +24,7 @@ let routes = [
 
 //创建router实例
 let router = new VueRouter({
-    base:'/goods',
+    mode:"history",
     linkActiveClass:'active',
     routes
 });
