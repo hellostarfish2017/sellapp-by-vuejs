@@ -20,6 +20,9 @@
 
 <script type="text/ecmascript-6">
     import header from './components/header/header.vue';
+    import Vue from 'vue';
+
+
 
     const ERR_OK = 0;
 

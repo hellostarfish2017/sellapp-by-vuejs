@@ -10,6 +10,8 @@ import VueResource from 'vue-resource';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+
+
 //定义（路由）组件
 import goods from 'components/goods/goods';
 import seller from 'components/seller/seller';
@@ -33,7 +35,10 @@ new Vue({
     el: '#app',
     router,
     template: '<App/>',
-    components: {App}
+    components: {App},
+    data:{
+	     eventHub:new Vue()
+    }
 });
 
 // router.go('/goods');

@@ -33,9 +33,11 @@
 				} else {
 					this.food.count++;
 				}
-				this.$dispatch('cart.add',event.target)
+
+				let tar = event.target;
+				this.$root.eventHub.$emit('cart-add', tar);
 			},
-			decreaseCart(){
+			decreaseCart(event){
 				if (!event._constructed) {
 					return;
 				}

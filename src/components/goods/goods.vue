@@ -38,7 +38,7 @@
                 </li>
             </ul>
         </div>
-        <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
+        <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods" ref="shopcart"></shopcart>
     </div>
 </template>
 
@@ -76,7 +76,13 @@
 					})
 				}
 			});
-			this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']
+
+			this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
+
+            //监听cartcontrol分发过来的事件
+			this.$root.eventHub.$on('cart-add',(tar)=>{
+				this._drop(tar);
+            });
 		},
 		computed: {
 			currentIndex(){
@@ -98,7 +104,7 @@
 							foods.push(food);
                         }
                     })
-                })
+                });
                 return foods;
             }
 		},
@@ -136,12 +142,19 @@
 	            let foodList = document.getElementsByClassName('foot-list-hook');
                 let el=foodList[index];
                 this.foodsScroll.scrollToElement(el,300);
+            },
+            _drop(target){
+            	//动画体验优化，异步执行下落动画
+            	this.$nextTick(()=>{
+                this.$refs.shopcart.drop(target);
+            	})
             }
 		},
         components:{
 			shopcart,
 			cartcontrol
-        }
+        },
+
 
 	};
 
